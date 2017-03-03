@@ -1,0 +1,1055 @@
+[git別系統の切り替え手順（考察）]
+
+instaglass【git controll】
+=================
+2017.2.11 Sun.
+【git等各セット 構成】
+
+
+Repo[git(master/develop/feature)]
+
+|
+
+PC(git:master)  ---  Sakura RS(glass)
+develop         - -   Sakura RS(sql)
+^
+| merge
+
+PC(git:feature) ---  Sakura RS(sql)
+
+【詳細仕様】UpRegistクラス
+club.phpで取得したpnameを
+UpDbのinsertPictで登録する。
+pnameを反転してurlも登録する。
+登録の際にpidを取得する。
+pidをDbClassのinsertGlassで
+oid=1でglassに登録する。
+
+index.php
+club.php
+upRegist.php
+【基本仕様】Uploadとのindexの間のデータ連携
+club.phpで入力する画像名を
+index.phpで使用するMySQLに登録する。
+pictにはpnameとurlを
+glassにはその際出たpidと登録者のoid(=1)を。
+連携のクラスを作ろう。名称はUpRegist
+表示とアップは別系統。
+ＤＢクラスも別にする。
+================= 
+
+instaglass【git controll】
+=================
+2017.1.6 Fri.
+~~  glass.php、createPages.phpなどのプログラムは放置で、今後の検討。マージ実行時の差分追記が入っている。
+内容は、クローラー対策コードの追加など。
+~~ クローラー対策は急務としてダイレクトに入れたはず。
+次のブランチでコミットすべきか？
+=================
+2017.1.2 Mon.
+child.htmlはglass/にあった。
+child.html、test.htmlは開いたウィンドウに値を渡すテストで不要。
+=================
+2017-1-1 Sun.
+PC上でfeature/after_releaseのブランチをgit pullしたが、git statusでの多くのuntrackedファイルは消えなかった。
+test.htmlとchild.phpは用途不明。テスト用の一時ファイルとしてもglass、sql/ともサーバー上にないのはどこで試験したか不思議。
+~~ 数が多く分かりにくいので、以下の処理をした。
+jpgファイルはコミットした。
+backup等とファイル名に追加されているファイルはgit外のverフォルダに入れた。
+
+=================
+
+=================
+=================
+instaglass【git flowプラン】
+=================
+2016-12-27 Tue.
+PC上でgit statusでブランチはアップデートされていると表示されるのだが、その後多くの不明ファイルが表示された。
+一つは多数のjpgファイル。
+二つ目はglass.php、itsatime.php
+などのプログラムで、使用しないので、無視できる？
+三つ目は、前回マージをオフィスのＰＣで行ったので、それとの相違？そうなら、pullしてくれば無くなるか？
+=================
+2016-12-20 .
+RSサーバーのglass/ では index.php で まだ/i/show1だった。
+改良版の適用はされていない。
+sql/コンテンツでは、'show1.php'になっている。
+git/sql → RS/sql → git/Master→ RS/glassの順に変わる仕組み。Masterをアップしてもよいか？すぐなら次でもいいか？
+=================
+2016-12-14 Wed.　
+マージは完了したがgit内ですべての修正が組み込まれたか疑問。確認作業が必要。
+サーバーのsql/では確認したはずでgit/PCとの相違が問題。
+方法：RSサーバーのsql/コンテンツをDLする。
+winmergeでgit branchとの相違をみる。？
+git化すれば自動的に分かるはず。
+branchでDLすれば、相違が出る。
+
+=================
+12/06 T-NET
+本社オフィスでgit Trialを行う。
+PC as,32bit intel Core
+=================
+必要ツール
+putty、sourcetree、netbeans、xampp
+(port80 inuseの警告有り)
+On sourcetreeでのメッセージ
+[SEH_AV_READ_BADPTR] ACCESS_VIOLATION (0xc0000005) at address [0x00f0dc27]
+Advanced Installer Enhanced UI 13.2.2 build 73312
+*** Stack Trace (x86) ***
+Auto-merging myfile.txt
+
+CONFLICT (content): Merge conflict in myfile.txt
+
+Automatic merge failed; fix conflicts and then commit the result.
+
+競合箇所を修正したので、改めてコミットします。
+
+$ git add myfile.txt
+
+$ git commit -m "issue3ブランチをマージ"
+
+# On branch master
+
+nothing to commit (working directory clean)
+
+And successed.
+
+Two directions are oposite , reason is not sure.
+
+At least , web direction includes direct fix on master and it might be one of the reason.
+
+（以上はマージ成功の経緯）
+
+****************************************
+12/07
+master にマージした。
+
+内容は確認した。
+
+ブランチの追加修正は、入っていた。
+
+しかし、developにマージしていない。
+
+git flowではdevelopにマージする。
+
+きのうの情報はgitの解説？
+
+git flow におけるdevelopとmasterの相違。
+複数のパスで開発された集約がdevelop
+
+LIVEそのものがmaster
+（releaseはその準備版）
+手順としては、まずdevelopに集約、
+それを調整して（LIVE用DB等設定変え）release、
+タイミングを見てそれをコピー（タグ）してmaster、
+
+結論として、LIVE設定すればOK
+developは取り残されている。
+
+従って行うべきは、developにマージして
+
+LIVE設定をしてmasterにマージする。
+
+きのうやった処理。
+-----------------
+$ git checkout master
+$ git merge feature/after_erase
+
+-----------------
+必要な処理
+
+($ git checkout -b origin/developで失敗)
+
+sourcetreeでローカルdevelopを作成した。
+
+-----------------
+$ git checkout develop
+$ git merge feature/after_erase
+-----------------
+
+LIVE設定は、
+incl.のsql/ glass
+
+DBの設定名
+
+（もう一つ、masterでは名前空間のSpeakerをSpeakにする）
+
+これをmasterで変更する。
+
+masterを変更して、add、commit、push
+
+developにもブランチをマージして、add、commit、push
+
+（masterにはLIVE設定をするので必ず先行する。
+しかしgitはその差異を無視できない。同期しようとする？）
+
+>>>>>>>>>>>>>>>>>>>>>
+new branch for  
+
+============================
+
+############################
+1．新ブランチを生成して次期プランを制作する。
+
+二つの問題（inclの/sql/が/i/、コメントの混乱）解決は図れたのでブランチをクローズすべき。
+
+次の、アップロード組み込みや、いいね機能は別のブランチで。もう準備すべき。名前は、
+
+アップロード：　feature/upload
+いいね；　feature/iine
+ＰＣ版ページ：　feature/pcpage
+
+課題：
+アップロードとURL生成の一体化
+いいね、の付加機能
+ＰＣ版ページ
+
+============================
+
+$ git flow feature start <ブランチ名>
+
+feature ブランチ以外も同様に作成可能。
+
+たとえばmasterでこれをやってもdevelopベースになるのか？
+
+git checkout master
+
+git flow feature start uptest
+
+>>>>>>>>>>>>>>>>>>>>>
+
+j-fushimi@1Ac0019 MINGW32 /c/xampp/htdocs/pcglass (master)
+
+$ git flow feature start uptest
+
+Fatal: Not a gitflow-enabled repo yet. Please run 'git flow init' first.
+
+>>>>>>>>>>>>>>>>>>>>>
+
+これは一体なんだろう？
+
+ずっとgit flowリポジトリではなかったということ？
+
+sourcetreeでクローンしただけではならないのか。
+
+sourcetree上で新規ブランチをgitflowで作ればなるのか？
+
+uploadを作ってから、やってみる。
+
+・・・初期化が出てきた。
+
+だからdevelopがローカルに無かったのか。
+
+developは無事か？
+
+developはsql/のままだった。
+
+追加課題：
+
+developのincl.に/i/が残っていた。
+
+前回解消済み？
+
+$ git commit --allow-empty -m "WIP"
+
+>>>>>>>>>>>>>>>>>>>>>
+
+（名前空間のSpeakerをSpeakにしたのは、RSサーバのglass
+
+master、developはいじっていなかった。）
+
+一般にはサーバ上の修正はfeature/branchにしか入っていない。
+
+しかし、マージして入るはず。
+
+どこかで/i/  /glass/ 等の修正が抜けている。
+
+index.php line44(/i/) feature/after_erase → 
+
+(/i/) develop → 
+
+(/i/) upload
+
+feature/after_eraseのログ
+
+ログ上はコピーしたこと1つだけ。
+
+glassで変えた？
+
+ログ上のglassも同じだった。
+
+確認したソースはどこに？RS上？git反映なし？
+
+確認環境は多分、REGZA＋RS
+
+反映が必要。
+
+対象は、新規ブランチで準備して、develop→master、
+
+uploadは一旦消す。コミット遅れするので。
+
+いまソースはどこに？
+
+REGZA　＆　RS
+
+RSのsql？からDLして新ブランチにする。
+
+そのとき、現行との差分はマージconflict解消で行う。
+
+RS/sqlで修正されていた。
+
+RS/glass
+
+は未修正
+
+これは、名前空間の件（glassでSpeakをSpeakに）のみ
+
+これは、developには入っている。
+
+masterにも入っている。
+
+ほかに、1件あり。(glassでdbClassのrequireがincl.がsql)
+
+多数の衝突が予想される。
+
+自動マージではなく、ここだけ変えたほうがよい？
+
+defineの置き場所が決まっていない→要デバッグ
+
+サーバで動作確認すべき
+
+glassとsqlは動いている。
+
+別系統で試験すべきか？
+（同名衝突が有り得るけれども）
+
+他にサーバー固有コードは無いか？
+
+（以上は12/6オフィスにて）
+
+=================
+2016-11-13　instaglass【git flow計画】
+
+多分、コミットしていない変更が、大量にブランチに存在する。
+
+git plan : １．現ブランチをmergeする。現在、gitHubでconflict表示中。
+gitBashでコマンド実行してfixする。
+前準備として、ファイルバックアップ（現在の/sql/はコピー、）およびリカバリーコマンドの確認（HEAD）
+########
+マージ後（ただし、マージ完了をコミットしていない状態で）マージ前 の状態に戻したい場合は
+$ git reset --hard HEAD
+マージ後（マージ完了をコミットした状態で）マージ前に戻したい時は 以下のようにする
+$ git reset --hard ORIG_HEAD
+############################
+２．新ブランチを生成して次期プランを制作する。
+二つの問題（inclの/sql/が/i/、コメントの混乱）解決は図れたのでブランチをクローズすべき。
+次の、アップロード組み込みや、いいね機能は別のブランチで。もう準備すべき。名前は、
+アップロード：　feature/upload
+いいね；　feature/iine
+ＰＣ版ページ：　feature/pcpage
+
+2016-11　instaglass【無効なinclの/sql/が/i/】
+
+sql/index.phpのinclude_onceの
+www/i/show1.php
+を
+www/sql/show1.php
+にすると以下のエラーが出る。
+
+Fatal error: Cannot redeclare class Speaker\Show in /home/researchstudent/www/i/show1.php on line 7
+これは、名前空間なしで同名の関数を定義したときのエラー。
+
+/i/では、
+www/i/show1.php
+で動いている。
+名前空間の問題？
+
+【原因発見】
+www/i/show1.php
+のnamespaceを//でコメントアウトすると/sql/が動いた。
+多分名前空間が同名なので競合している。
+/sql/側のNameSpaceをSpeakerからSpeakに変えたら両方動いた。
+疑問1　/i/の方がアルファベットで早いから呼ばれたのかもしれないが、なぜglassと競合しないのか？
+疑問2　クラス名自体は競合しないのに、なぜ名前空間だけ？
+疑問3　同じサーバーで前作、テスト、本番と３つ入れていいのか？
+疑問4　エラーメッセージは「クラスSpeaker\Showを　/i/で再宣言することは出来ない」だが、解釈と合っているのか？
+一般的な名前空間なしでのエラーとは違っていて、/sql/の同名クラスは解決出来たが、/i/のは競合するということか。
+そうすると名前空間は通常のPHPで別ディレクトリでは追わないクラスもしつこく追いかけると言うことか？
+本番の/glass/は何もしなくていいのか？
+名前空間を制限する方法はあるのか？
+
+
+instaglass【git controll】
+=================
+2017.1.6 Fri.
+=================
+~~  glass.php、createPages.phpなどのプログラムは放置で、今後の検討。マージ実行時の差分追記が入っている。
+内容は、クローラー対策コードの追加など。
+~~ クローラー対策は急務としてダイレクトに入れたはず。
+次のブランチでコミットすべきか？
+=================
+2017.1.2 Mon.
+=================
+child.htmlはglass/にあった。
+child.html、test.htmlは開いたウィンドウに値を渡すテストで不要。
+=================
+2017-1-1 Sun.
+=================
+PC上でfeature/after_releaseのブランチをgit pullしたが、git statusでの多くのuntrackedファイルは消えなかった。
+test.htmlとchild.phpは用途不明。テスト用の一時ファイルとしてもglass、sql/ともサーバー上にないのはどこで試験したか不思議。
+~~ 数が多く分かりにくいので、以下の処理をした。
+jpgファイルはコミットした。
+backup等とファイル名に追加されているファイルはgit外のverフォルダに入れた。
+
+instaglass【git flowプラン】
+=====================================
+2016-12-27 Tue.
+=====================================
+PC上でgit statusでブランチはアップデートされていると表示されるのだが、その後多くの不明ファイルが表示された。
+一つは多数のjpgファイル。
+二つ目はglass.php、itsatime.php
+などのプログラムで、使用しないので、無視できる？
+三つ目は、前回マージをオフィスのＰＣで行ったので、それとの相違？そうなら、pullしてくれば無くなるか？
+=====================================
+2016-12-20 .
+=====================================
+RSサーバーのglass/ では index.php で まだ/i/show1だった。
+改良版の適用はされていない。
+sql/コンテンツでは、'show1.php'になっている。
+git/sql → RS/sql → git/Master→ RS/glassの順に変わる仕組み。Masterをアップしてもよいか？すぐなら次でもいいか？
+=====================================
+2016-12-14 Wed.　
+=====================================
+マージは完了したがgit内ですべての修正が組み込まれたか疑問。確認作業が必要。
+サーバーのsql/では確認したはずでgit/PCとの相違が問題。
+方法：RSサーバーのsql/コンテンツをDLする。
+winmergeでgit branchとの相違をみる。？
+git化すれば自動的に分かるはず。
+branchでDLすれば、相違が出る。
+
+=====================================
+12/06 T-NET
+=====================================
+本社オフィスでgit Trialを行う。
+PC as,32bit intel Core
+=================
+必要ツール
+putty、sourcetree、netbeans、xampp
+(port80 inuseの警告有り)
+On sourcetreeでのメッセージ
+[SEH_AV_READ_BADPTR] ACCESS_VIOLATION (0xc0000005) at address [0x00f0dc27]
+Advanced Installer Enhanced UI 13.2.2 build 73312
+*** Stack Trace (x86) ***
+Auto-merging myfile.txt
+
+CONFLICT (content): Merge conflict in myfile.txt
+
+Automatic merge failed; fix conflicts and then commit the result.
+
+競合箇所を修正したので、改めてコミットします。
+
+$ git add myfile.txt
+
+$ git commit -m "issue3ブランチをマージ"
+
+# On branch master
+
+nothing to commit (working directory clean)
+
+And successed.
+
+Two directions are oposite , reason is not sure.
+
+At least , web direction includes direct fix on master and it might be one of the reason.
+
+（以上はマージ成功の経緯）
+
+=====================================
+12/07
+=====================================
+
+master にマージした。
+
+内容は確認した。
+
+ブランチの追加修正は、入っていた。
+
+しかし、developにマージしていない。
+
+git flowではdevelopにマージする。
+
+きのうの情報はgitの解説？
+
+git flow におけるdevelopとmasterの相違。
+複数のパスで開発された集約がdevelop
+
+LIVEそのものがmaster
+（releaseはその準備版）
+手順としては、まずdevelopに集約、
+それを調整して（LIVE用DB等設定変え）release、
+タイミングを見てそれをコピー（タグ）してmaster、
+
+結論として、LIVE設定すればOK
+developは取り残されている。
+
+従って行うべきは、developにマージして
+
+LIVE設定をしてmasterにマージする。
+
+きのうやった処理。
+-----------------
+$ git checkout master
+$ git merge feature/after_erase
+
+-----------------
+必要な処理
+
+($ git checkout -b origin/developで失敗)
+
+sourcetreeでローカルdevelopを作成した。
+
+-----------------
+$ git checkout develop
+$ git merge feature/after_erase
+-----------------
+
+LIVE設定は、
+incl.のsql/ glass
+
+DBの設定名
+
+（もう一つ、masterでは名前空間のSpeakerをSpeakにする）
+
+これをmasterで変更する。
+
+masterを変更して、add、commit、push
+
+developにもブランチをマージして、add、commit、push
+
+（masterにはLIVE設定をするので必ず先行する。
+しかしgitはその差異を無視できない。同期しようとする？）
+
+>>>>>>>>>>>>>>>>>>>>>
+new branch for  
+
+============================
+
+############################
+1．新ブランチを生成して次期プランを制作する。
+
+二つの問題（inclの/sql/が/i/、コメントの混乱）解決は図れたのでブランチをクローズすべき。
+
+次の、アップロード組み込みや、いいね機能は別のブランチで。もう準備すべき。名前は、
+
+アップロード：　feature/upload
+いいね；　feature/iine
+ＰＣ版ページ：　feature/pcpage
+
+課題：
+アップロードとURL生成の一体化
+いいね、の付加機能
+ＰＣ版ページ
+
+============================
+
+
+
+$ git flow feature start <ブランチ名>
+
+feature ブランチ以外も同様に作成可能。
+
+たとえばmasterでこれをやってもdevelopベースになるのか？
+
+git checkout master
+
+git flow feature start uptest
+
+>>>>>>>>>>>>>>>>>>>>>
+
+j-fushimi@1Ac0019 MINGW32 /c/xampp/htdocs/pcglass (master)
+
+$ git flow feature start uptest
+
+Fatal: Not a gitflow-enabled repo yet. Please run 'git flow init' first.
+
+>>>>>>>>>>>>>>>>>>>>>
+
+これは一体なんだろう？
+
+ずっとgit flowリポジトリではなかったということ？
+
+sourcetreeでクローンしただけではならないのか。
+
+sourcetree上で新規ブランチをgitflowで作ればなるのか？
+
+uploadを作ってから、やってみる。
+
+・・・初期化が出てきた。
+
+だからdevelopがローカルに無かったのか。
+
+developは無事か？
+
+developはsql/のままだった。
+
+追加課題：
+
+developのincl.に/i/が残っていた。
+
+前回解消済み？
+
+$ git commit --allow-empty -m "WIP"
+
+>>>>>>>>>>>>>>>>>>>>>
+
+（名前空間のSpeakerをSpeakにしたのは、RSサーバのglass
+
+master、developはいじっていなかった。）
+
+一般にはサーバ上の修正はfeature/branchにしか入っていない。
+
+しかし、マージして入るはず。
+
+どこかで/i/  /glass/ 等の修正が抜けている。
+
+index.php line44(/i/) feature/after_erase → 
+
+(/i/) develop → 
+
+(/i/) upload
+
+feature/after_eraseのログ
+
+ログ上はコピーしたこと1つだけ。
+
+glassで変えた？
+
+ログ上のglassも同じだった。
+
+確認したソースはどこに？RS上？git反映なし？
+
+確認環境は多分、REGZA＋RS
+
+反映が必要。
+
+対象は、新規ブランチで準備して、develop→master、
+
+uploadは一旦消す。コミット遅れするので。
+
+いまソースはどこに？
+
+REGZA　＆　RS
+
+RSのsql？からDLして新ブランチにする。
+
+そのとき、現行との差分はマージconflict解消で行う。
+
+RS/sqlで修正されていた。
+
+RS/glass
+
+は未修正
+
+これは、名前空間の件（glassでSpeakをSpeakに）のみ
+
+これは、developには入っている。
+
+masterにも入っている。
+
+ほかに、1件あり。(glassでdbClassのrequireがincl.がsql)
+
+多数の衝突が予想される。
+
+自動マージではなく、ここだけ変えたほうがよい？
+
+defineの置き場所が決まっていない→要デバッグ
+
+サーバで動作確認すべき
+
+glassとsqlは動いている。
+
+別系統で試験すべきか？
+（同名衝突が有り得るけれども）
+
+他にサーバー固有コードは無いか？
+
+（以上は12/6オフィスにて）
+
+=====================================
+2016-11-13　instaglass【git flow計画】
+=====================================
+
+多分、コミットしていない変更が、大量にブランチに存在する。
+
+git plan : １．現ブランチをmergeする。現在、gitHubでconflict表示中。
+gitBashでコマンド実行してfixする。
+前準備として、ファイルバックアップ（現在の/sql/はコピー、）およびリカバリーコマンドの確認（HEAD）
+########
+マージ後（ただし、マージ完了をコミットしていない状態で）マージ前 の状態に戻したい場合は
+$ git reset --hard HEAD
+マージ後（マージ完了をコミットした状態で）マージ前に戻したい時は 以下のようにする
+$ git reset --hard ORIG_HEAD
+############################
+２．新ブランチを生成して次期プランを制作する。
+二つの問題（inclの/sql/が/i/、コメントの混乱）解決は図れたのでブランチをクローズすべき。
+次の、アップロード組み込みや、いいね機能は別のブランチで。もう準備すべき。名前は、
+アップロード：　feature/upload
+いいね；　feature/iine
+ＰＣ版ページ：　feature/pcpage
+
+2016-11　instaglass【無効なinclの/sql/が/i/】
+
+sql/index.phpのinclude_onceの
+www/i/show1.php
+を
+www/sql/show1.php
+にすると以下のエラーが出る。
+
+Fatal error: Cannot redeclare class Speaker\Show in /home/researchstudent/www/i/show1.php on line 7
+これは、名前空間なしで同名の関数を定義したときのエラー。
+
+/i/では、
+www/i/show1.php
+で動いている。
+名前空間の問題？
+
+【原因発見】
+www/i/show1.php
+のnamespaceを//でコメントアウトすると/sql/が動いた。
+多分名前空間が同名なので競合している。
+/sql/側のNameSpaceをSpeakerからSpeakに変えたら両方動いた。
+疑問1　/i/の方がアルファベットで早いから呼ばれたのかもしれないが、なぜglassと競合しないのか？
+疑問2　クラス名自体は競合しないのに、なぜ名前空間だけ？
+疑問3　同じサーバーで前作、テスト、本番と３つ入れていいのか？
+疑問4　エラーメッセージは「クラスSpeaker\Showを　/i/で再宣言することは出来ない」だが、解釈と合っているのか？
+一般的な名前空間なしでのエラーとは違っていて、/sql/の同名クラスは解決出来たが、/i/のは競合するということか。
+そうすると名前空間は通常のPHPで別ディレクトリでは追わないクラスもしつこく追いかけると言うことか？
+本番の/glass/は何もしなくていいのか？
+名前空間を制限する方法はあるのか？
+
+
+=====================================
+2016-11-13　instaglass【git flow計画】
+=====================================
+
+多分、コミットしていない変更が、大量にブランチに存在する。
+
+git plan : １．現ブランチをmergeする。現在、gitHubでconflict表示中。
+gitBashでコマンド実行してfixする。
+前準備として、ファイルバックアップ（現在の/sql/はコピー、）およびリカバリーコマンドの確認（HEAD）
+########
+マージ後（ただし、マージ完了をコミットしていない状態で）マージ前 の状態に戻したい場合は
+$ git reset --hard HEAD
+マージ後（マージ完了をコミットした状態で）マージ前に戻したい時は 以下のようにする
+$ git reset --hard ORIG_HEAD
+############################
+２．新ブランチを生成して次期プランを制作する。
+二つの問題（inclの/sql/が/i/、コメントの混乱）解決は図れたのでブランチをクローズすべき。
+次の、アップロード組み込みや、いいね機能は別のブランチで。もう準備すべき。名前は、
+アップロード：　feature/upload
+いいね；　feature/iine
+ＰＣ版ページ：　feature/pcpage
+
+=====================================
+2016-11　instaglass【無効なinclの/sql/が/i/】
+=====================================
+
+sql/index.phpのinclude_onceの
+www/i/show1.php
+を
+www/sql/show1.php
+にすると以下のエラーが出る。
+
+Fatal error: Cannot redeclare class Speaker\Show in /home/researchstudent/www/i/show1.php on line 7
+これは、名前空間なしで同名の関数を定義したときのエラー。
+
+/i/では、
+www/i/show1.php
+で動いている。
+名前空間の問題？
+
+【原因発見】
+www/i/show1.php
+のnamespaceを//でコメントアウトすると/sql/が動いた。
+多分名前空間が同名なので競合している。
+/sql/側のNameSpaceをSpeakerからSpeakに変えたら両方動いた。
+疑問1　/i/の方がアルファベットで早いから呼ばれたのかもしれないが、なぜglassと競合しないのか？
+疑問2　クラス名自体は競合しないのに、なぜ名前空間だけ？
+疑問3　同じサーバーで前作、テスト、本番と３つ入れていいのか？
+疑問4　エラーメッセージは「クラスSpeaker\Showを　/i/で再宣言することは出来ない」だが、解釈と合っているのか？
+一般的な名前空間なしでのエラーとは違っていて、/sql/の同名クラスは解決出来たが、/i/のは競合するということか。
+そうすると名前空間は通常のPHPで別ディレクトリでは追わないクラスもしつこく追いかけると言うことか？
+本番の/glass/は何もしなくていいのか？
+名前空間を制限する方法はあるのか？
+
+=====================================
+2016-10　instaglass【コメントの混乱】
+=====================================
+res/glass、res/sql、instaglass/
+三つで試験
+res/glassで登録→表示されない
+実行結果までresearch/glass/
+res/sqlで登録→すべてで表示
+実行結果までres/sql/
+（表示系は？namespace?）
+2016-10-29
+【　調査結果　】
+/glass/系の表示系を逐次確認
+DbClassのreqire_once の絶対表記が /sql/となっていた
+  /glass/に直して正常化した。
+（他にも/i/の絶対表示があるが変えるとエラー→要検討）
+（なぜ絶対表示が必要か？、namespace？）
+課題：
+アップロードとURL生成の一体化
+いいね、の付加機能
+ＰＣ版ページ
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+feature/after_erase（名前空間etc）
+を
+master/develop
+にマージしてから
+（gitHubでプルリク？）
+
+
+feature/imageup新規開始
+
+upload関連の修正を入れる。
+
+
+/i/ /sql/はどちらに入れる？
+
+=====================================
+2016-11-13　instaglass【git flow計画】
+=====================================
+
+git plan : １．現ブランチをmergeする。現在、gitHubでconflict表示中。
+gitBashでコマンド実行してfixする。
+前準備として、ファイルバックアップ（現在の/sql/はコピー、）およびリカバリーコマンドの確認（HEAD）
+########
+マージ後（ただし、マージ完了をコミットしていない状態で）マージ前 の状態に戻したい場合は
+$ git reset --hard HEAD
+マージ後（マージ完了をコミットした状態で）マージ前に戻したい時は 以下のようにする
+$ git reset --hard ORIG_HEAD
+############################
+２．新ブランチを生成して次期プランを制作する。
+二つの問題（inclの/sql/が/i/、コメントの混乱）解決は図れたのでブランチをクローズすべき。
+次の、アップロード組み込みや、いいね機能は別のブランチで。もう準備すべき。名前は、
+アップロード：　feature/upload
+いいね；　feature/iine
+ＰＣ版ページ：　feature/pcpage
+
+2016-11　instaglass【無効なinclの/sql/が/i/】
+
+sql/index.phpのinclude_onceの
+www/i/show1.php
+を
+www/sql/show1.php
+にすると以下のエラーが出る。
+
+Fatal error: Cannot redeclare class Speaker\Show in /home/researchstudent/www/i/show1.php on line 7
+これは、名前空間なしで同名の関数を定義したときのエラー。
+
+/i/では、
+www/i/show1.php
+で動いている。
+名前空間の問題？
+
+【原因発見】
+www/i/show1.php
+のnamespaceを//でコメントアウトすると/sql/が動いた。
+多分名前空間が同名なので競合している。
+/sql/側のNameSpaceをSpeakerからSpeakに変えたら両方動いた。
+疑問1　/i/の方がアルファベットで早いから呼ばれたのかもしれないが、なぜglassと競合しないのか？
+疑問2　クラス名自体は競合しないのに、なぜ名前空間だけ？
+疑問3　同じサーバーで前作、テスト、本番と３つ入れていいのか？
+疑問4　エラーメッセージは「クラスSpeaker\Showを　/i/で再宣言することは出来ない」だが、解釈と合っているのか？
+一般的な名前空間なしでのエラーとは違っていて、/sql/の同名クラスは解決出来たが、/i/のは競合するということか。
+そうすると名前空間は通常のPHPで別ディレクトリでは追わないクラスもしつこく追いかけると言うことか？
+本番の/glass/は何もしなくていいのか？
+名前空間を制限する方法はあるのか？
+
+=====================================
+2016-10　instaglass【コメントの混乱】
+=====================================
+
+res/glass、res/sql、instaglass/
+三つで試験
+res/glassで登録→表示されない
+実行結果までresearch/glass/
+res/sqlで登録→すべてで表示
+実行結果までres/sql/
+（表示系は？namespace?）
+2016-10-29
+【　調査結果　】
+/glass/系の表示系を逐次確認
+DbClassのreqire_once の絶対表記が /sql/となっていた
+  /glass/に直して正常化した。
+（他にも/i/の絶対表示があるが変えるとエラー→要検討）
+（なぜ絶対表示が必要か？、namespace？）
+課題：
+アップロードとURL生成の一体化
+いいね、の付加機能
+ＰＣ版ページ
+
+
+------------------------------
+
+
+
+
+------------------------------
+=====================================
+2016-11　instaglass【無効なinclの/sql/が/i/】
+=====================================
+
+sql/index.phpのinclude_onceの
+www/i/show1.php
+を
+www/sql/show1.php
+にすると以下のエラーが出る。
+
+Fatal error: Cannot redeclare class Speaker\Show in /home/researchstudent/www/i/show1.php on line 7
+これは、名前空間なしで同名の関数を定義したときのエラー。
+
+/i/では、
+www/i/show1.php
+で動いている。
+名前空間の問題？
+
+試験結果：（11/5)
+/i/と  /sql/の show1.php,index.phpはまったく同形。
+i/のnamespace を外してみると、/sql/が動いた。
+考察１：名前空間では何かの理由でパースペクティブに/i/が優先される？(alphabet?)
+考察２：名前空間ではサーバー内の全コンテンツ(www/)が参照される？
+考察１：同名のクラスを同一サーバー内に置いてはいけない？
+名前空間とphpのパースペクティブの相違は？
+
+対策案1：本番とテストで名前空間を変える、Speakerから
+
+対策案2：本番とテストでクラス名を変える
+
+対策案3：本番とテストでディレクトリ等を変える
+
+------------------------------
+
+当面DB関連
+
+
+TB_NAMEはDBの名前
+LIVEがまだｓｑｌを使っている。
+defineを別ファイルに
+別ファイルをLIVE,TEST切り替えに
+
+LIVEのスマホコメントがテストDB
+テストモードに切り替えると正常化。
+LIVE DBからコメントを読む。
+
+
+
+
+Tweet画像Service／MVC
+app/Model/
+app/View/
+app/Controll/
+Model**DbClass→(output,takeout,remember,find,pull,read,
+ReadDb/readComment,readOwner,readUrl,
+//DbClass/dbGet()
+Controll**
+index.php
+CreateComment,ShowMain
+//コメントを選んで表示すること
+//CreateComment/showComment(db)
+//コメントを受け付けて記録すること
+//InviteComment/receiveComment(db)
+
+View**
+//UniteAsOne/uniteParts
+//CreatePage/showHeader,showTop,showBlack,showWhite
+//CreatePicture/showMain($temp)
+//ページを作成すること
+//CreatePage/showHeader,showTop,showBlack,showWhite
+//CreatePicture/showMain($temp)
+//DbClass/dbGet()
+//Comment\showComment()/showList($arr_comment);
+//CreatePage/showAttention();
+//CreatePage/showFooter
+//画像を選んで表示すること
+//CreatePicture/showMain
+//（画像を受け付けて記録すること）
+//（InvitePicture/receivePicture）
+
+//showForm,receiveForm,
+//JavaScriptで飛ばす先のform
+//inputComment.html
+//コメントフォーム
+//dbinsComment.php
+//フォーム受け取り
+
+------------------------------
+／今後
+(継続的インテグレーション、git,jenkins同時進行)
+ＰＣ版レイアウト、
+リファクタリング、
+画像upの統合化
+高度ＳＱＬ、
+最新ＰＨＰ機能、
+java仕様、
+
+
+=====================================
+2016-12-03
+=====================================
+
+merge　実行
+
+/c/Users/user/My Documents/sakura_rs/www/sql
+にて、
+
+ブランチ
+gitHub上のコンフリクトのコマンド指示
+
+Checkout via command line
+
+If you cannot merge a pull request automatically here, you have the option of checking it out via command line to resolve conflicts and perform a manual merge. 
+
+Step 1: From your project repository, bring in the changes and test.
+
+git fetch origin
+git checkout -b feature/after_erase origin/feature/after_erase
+
+エラー（fatal: A branch named 'feature/after_erase' already exists.）
+
+git merge master
+
+結果：
+$ git merge master
+Auto-merging inputComment.html
+CONFLICT (content): Merge conflict in inputComment.html
+CONFLICT (modify/delete): glass.php deleted in HEAD and modified in master. Version master of glass.php left in tree.
+Auto-merging dbinsComment.php
+CONFLICT (content): Merge conflict in dbinsComment.php
+Auto-merging dbClass.php
+CONFLICT (content): Merge conflict in dbClass.php
+Auto-merging createPage.php
+CONFLICT (content): Merge conflict in createPage.php
+Automatic merge failed; fix conflicts and then commit the result.
+
+SourceTreeを見る。
+
+
+
+Step 2: Merge the changes and update on GitHub.
+
+git checkout master
+git merge --no-ff feature/after_erase
+git push origin master
+
+
+
+
+
+
+
+
