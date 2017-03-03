@@ -1,0 +1,2 @@
+1422977058
+a:2:{s:4:"name";a:7:{i:4261524519;s:8:"`mydata`";i:1145012663;s:11:"`Customers`";i:175635970;s:15:"`Customer`.`id`";i:4059358426;s:17:"`Customer`.`name`";i:2007074583;s:20:"`Customer`.`comment`";i:2960717300;s:10:"`Customer`";i:2609997277;s:7:"`count`";}s:6:"fields";a:2:{s:32:"95e206d98da177c012c3008523471ddb";a:3:{i:0;s:15:"`Customer`.`id`";i:1;s:17:"`Customer`.`name`";i:2;s:20:"`Customer`.`comment`";}s:32:"a8251ff5df0b1c8f460872f7b5316e4c";a:1:{i:0;s:19:"COUNT(*) AS `count`";}}}

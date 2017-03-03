@@ -1,0 +1,150 @@
+2015-02-01 02:00:15 Error: [MissingControllerException] Controller class Index.phpController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-01 02:06:45 Error: [MissingActionException] Action AppController::index.php() could not be found.
+#0 /var/www/html/cake/baking/lib/Cake/Routing/Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/cake/baking/lib/Cake/Routing/Dispatcher.php(85): Dispatcher->_invoke(Object(AppController), Object(CakeRequest), Object(CakeResponse))
+#2 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 /var/www/html/cake/baking/app/index.php(17): require('/var/www/html/c...')
+#4 {main}
+2015-02-01 02:17:56 Error: [MissingControllerException] Controller class Index.phpController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:46:28 Error: [MissingControllerException] Controller class CatalogController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:46:29 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:46:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:46:31 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:47:14 Error: [MissingControllerException] Controller class SaleController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:47:14 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:47:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:47:50 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:47:50 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:52:06 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:52:06 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:52:06 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:54:41 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:54:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:57:55 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 08:57:55 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 09:00:35 Error: [MissingControllerException] Controller class Index.phpController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:50:19 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:50:19 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:50:23 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:50:38 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:50:38 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:50:39 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:59:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-03 23:59:41 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:03:51 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:17:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:17:37 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:18:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:18:23 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:18:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:18:23 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:24:08 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
+2015-02-04 00:24:08 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/cake/baking/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 /var/www/html/cake/baking/index.php(40): require('/var/www/html/c...')
+#2 {main}
